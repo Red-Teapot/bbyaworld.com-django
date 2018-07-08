@@ -1,0 +1,14 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}BBya World{% endblock %}</title>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'website/style.css' %}" />
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+</html>
