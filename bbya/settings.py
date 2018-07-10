@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pipeline',
+    'website.apps.WebsiteConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,4 +120,53 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'bower_components'),
+)
+
+# Django Pipeline
+PIPELINE = {
+    'PIPELINE_ENABLED': not DEBUG,
+    'CSS_COMPRESSOR': None,
+    'JS_COMPRESSOR': None,
+    'COMPILERS': (
+        'pipeline.compilers.stylus.StylusCompiler',
+    ),
+    'STYLUS_BINARY': os.path.join(BASE_DIR, 'node_modules/stylus/bin/stylus'),
+    'STYLESHEETS': {
+        'website_main': {
+            'source_filenames': (
+                'website/stylus/main.styl',
+            ),
+            'output_filename': 'css/website_main.css',
+        },
+        'bower': {
+            'source_filenames': (
+                'bootstrap/dist/css/bootstrap.min.css',
+            ),
+            'output_filename': 'css/bower.css',
+        },
+    },
+    'JAVASCRIPT': {
+        'website_main': {
+            'source_filenames': (
+                'website/js/*.js',
+            ),
+            'output_filename': 'js/website_main.js',
+        },
+        'bower': {
+            'source_filenames': (
+                'bootstrap/dist/js/bootstrap.min.js',
+            ),
+            'output_filename': 'js/bower.js',
+        },
+    },
+}
