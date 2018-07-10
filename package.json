@@ -1,0 +1,23 @@
+{
+  "name": "bbya_website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "stylus": "^0.54.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/bbyaworld/website-new.git"
+  },
+  "author": "RedTeapot <some.redteapot@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/bbyaworld/website-new/issues"
+  },
+  "homepage": "https://gitlab.com/bbyaworld/website-new#README"
+}
