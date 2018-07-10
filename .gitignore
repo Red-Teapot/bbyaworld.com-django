@@ -126,3 +126,6 @@ venv.bak/
 
 
 # End of https://www.gitignore.io/api/sass,django,python
+
+# Virtualenv
+virtualenv
