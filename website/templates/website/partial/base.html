@@ -39,7 +39,7 @@
 
         {% block head %}{% endblock %}
     </head>
-    <body class="{{ class }}">
+    <body class="{% block body_class %}{% endblock %}">
         {% block content %}{% endblock %}
 
         {% include 'website/partial/3rdparty/yandex-metrika.html' %}
