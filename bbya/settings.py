@@ -164,6 +164,7 @@ PIPELINE = {
         },
         'bower': {
             'source_filenames': (
+                'jquery/dist/jquery.min.js',
                 'bootstrap/dist/js/bootstrap.min.js',
             ),
             'output_filename': 'js/bower.js',
