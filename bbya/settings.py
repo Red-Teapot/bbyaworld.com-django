@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pipeline',
     'website.apps.WebsiteConfig',
+    'player_online_stats.apps.PlayerOnlineStatsConfig',
 ]
 
 MIDDLEWARE = [
