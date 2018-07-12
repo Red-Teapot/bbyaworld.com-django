@@ -1,8 +1,5 @@
-{% load static %}
-{% load pipeline %}
-
-{% with game_version='1.12' %}
-{% with suffix='Лицензионный сервер Майнкрафт '|add:game_version|add:' - BByaWorld' %}
+{% set game_version='1.12' %}
+{% set title_suffix='Лицензионный сервер Майнкрафт ' + game_version + ' - BByaWorld' %}
 
 <!DOCTYPE html>
 <html>
@@ -13,11 +10,11 @@
 
         <meta name="description" content="Только на нашем сервере Майнкрафт самые невероятные идеи и нестандартная реализация! Попробуйте наш сервер, и вы останетесь с нами навсегда!" />
 
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/raw/apple-touch-icon.png' %}">
-        <link rel="icon" type="image/png" href="{% static 'website/raw/favicon-32x32.png' %}" sizes="32x32">
-        <link rel="icon" type="image/png" href="{% static 'website/raw/favicon-16x16.png' %}" sizes="16x16">
-        <link rel="manifest" href="{% static 'website/raw/manifest.json' %}">
-        <link rel="mask-icon" href="{% static 'website/raw/safari-pinned-tab.svg' %}" color="#18609d">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ static('website/raw/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" href="{{ static('website/raw/favicon-32x32.png') }}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{ static('website/raw/favicon-16x16.png') }}" sizes="16x16">
+        <link rel="manifest" href="{{ static('website/raw/manifest.json') }}">
+        <link rel="mask-icon" href="{{ static('website/raw/safari-pinned-tab.svg') }}" color="#18609d">
         <meta name="theme-color" content="#ffffff">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=latin,cyrillic" rel="stylesheet" type="text/css" />
@@ -31,19 +28,19 @@
 
         <title>
             {% if title %}
-                {{ title }} &mdash; {{ suffix }}
+                {{ title }} &mdash; {{ title_suffix }}
             {% else %}
-                {{ suffix }}
+                {{ title_suffix }}
             {% endif %}
         </title>
 
         {% block head %}{% endblock %}
     </head>
-    <body class="{% block body_class %}{% endblock %}">
+    <body {% if body_class %}class="{{ body_class }}"{% endif %}>
         {% block content %}{% endblock %}
 
-        {% include 'website/partial/3rdparty/yandex-metrika.html' %}
-        {% include 'website/partial/3rdparty/google-analytics.html' %}
+        {% include 'website/components/yandex-metrika.html' %}
+        {% include 'website/components/google-analytics.html' %}
 
         {% javascript 'bower' %}
         {% javascript 'website_main' %}
@@ -52,6 +49,3 @@
 
 {% block after_html %}
 {% endblock %}
-
-{% endwith %}
-{% endwith %}
