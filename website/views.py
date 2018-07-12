@@ -10,3 +10,6 @@ def rules(request):
 
 def newbie_info(request):
     return render(request, 'website/newbie-info.html')
+
+def contacts(request):
+    return render(request, 'website/contacts.html')
