@@ -7,3 +7,6 @@ def index(request):
 
 def rules(request):
     return render(request, 'website/rules.html')
+
+def newbie_info(request):
+    return render(request, 'website/newbie-info.html')
