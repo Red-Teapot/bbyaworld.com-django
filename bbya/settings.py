@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pipeline',
     'django_cron',
+    'common.apps.CommonConfig',
     'website.apps.WebsiteConfig',
     'player_online_stats.apps.PlayerOnlineStatsConfig',
 ]
