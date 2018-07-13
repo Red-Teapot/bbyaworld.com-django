@@ -3,8 +3,6 @@
 {% set body_class='carousel-narrow' %}
 {% set title='Статистика' %}
 
-{% set pages_total = (total_count / 50)|round(0, 'ceil') %}
-
 {% block content %}
     {% include 'website/components/header.html' %}
 
@@ -21,43 +19,41 @@
                 </tr>
             </thead>
             <tbody>
-                {% if players_stats|length > 0 %}
-                    {% for player in players_stats %}
-                        <tr>
-                            <td class="index">{{ loop.index0 + 1 + (current_page - 1) * 50 }}</td>
-                            <td><img src="https://minotar.net/helm/{{ player.nickname }}/32" /></td>
-                            <td>{{ player.nickname }}</td>
-                            <td class="right">{{ (player.time / 60)|number_format() }} ч</td>
-                        </tr>
-                    {% endfor %}
+                {% for player in object_list %}
+                    <tr>
+                        <td class="index">{{ loop.index0 + 1 + (page_obj.number - 1) * 50 }}</td>
+                        <td><img src="https://minotar.net/helm/{{ player.nickname }}/32" /></td>
+                        <td>{{ player.nickname }}</td>
+                        <td class="right">{{ (player.time / 60)|number_format() }} ч</td>
+                    </tr>
                 {% else %}
                     <tr>
                         <td class="empty" colspan="4">Тут пусто</td>
                     </tr>
-                {% endif %}
+                {% endfor %}
             </tbody>
         </table>
         <div class="pager">
-            {% if current_page > 1 %}
-                <a href="?p=1" title="Первая страница">&laquo;</a>
+            {% if page_obj.number > 1 %}
+                <a href="?page=1" title="Первая страница">&laquo;</a>
             {% endif %}
-            {% if current_page > 2 %}
-                <a href="?p={{ current_page - 2 }}">{{ current_page - 2 }}</a>
+            {% if page_obj.number > 2 %}
+                <a href="?page={{ page_obj.number - 2 }}">{{ page_obj.number - 2 }}</a>
             {% endif %}
-            {% if current_page > 1 %}
-                <a href="?p={{ current_page - 1 }}">{{ current_page - 1 }}</a>
+            {% if page_obj.number > 1 %}
+                <a href="?page={{ page_obj.number - 1 }}">{{ page_obj.number - 1 }}</a>
             {% endif %}
-            <span class="page current">{{ current_page }}</span>
-            {% if current_page < pages_total %}
-                <a href="?p={{ current_page + 1 }}">{{ current_page + 1 }}</a>
+            <span class="page current">{{ page_obj.number }}</span>
+            {% if page_obj.number < page_obj.paginator.num_pages %}
+                <a href="?page={{ page_obj.number + 1 }}">{{ page_obj.number + 1 }}</a>
             {% endif %}
-            {% if current_page < pages_total - 1 %}
-                <a href="?p={{ current_page + 2 }}">{{ current_page + 2 }}</a>
+            {% if page_obj.number < page_obj.paginator.num_pages - 1 %}
+                <a href="?page={{ page_obj.number + 2 }}">{{ page_obj.number + 2 }}</a>
             {% endif %}
-            {% if current_page < pages_total %}
-                <a href="?p={{ pages_total }}" title="Последняя страница">&raquo;</a>
+            {% if page_obj.number < page_obj.paginator.num_pages %}
+                <a href="?page={{ page_obj.paginator.num_pages }}" title="Последняя страница">&raquo;</a>
             {% endif %}
-            <p class="minor">Страница {{ current_page|int() }} из {{ pages_total|int() }}</p>
+            <p class="minor">Страница {{ page_obj.number|int() }} из {{ page_obj.paginator.num_pages|int() }}</p>
         </div>
     </div>
 

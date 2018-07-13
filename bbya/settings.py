@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pipeline',
+    'django_cron',
     'website.apps.WebsiteConfig',
     'player_online_stats.apps.PlayerOnlineStatsConfig',
 ]
@@ -181,3 +182,9 @@ PIPELINE = {
         },
     },
 }
+
+# Cron jobs (django-cron app)
+
+CRON_CLASSES = [
+    'player_online_stats.update_job.UpdateJob',
+]

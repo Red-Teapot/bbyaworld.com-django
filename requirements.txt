@@ -1,3 +1,5 @@
 django
 django-pipeline
 jinja2
+django-cron
+mcstatus

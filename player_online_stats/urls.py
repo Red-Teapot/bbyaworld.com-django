@@ -5,5 +5,5 @@ from . import views
 app_name='player_online_stats'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.StatsView.as_view(), name='index'),
 ]
