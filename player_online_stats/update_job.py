@@ -1,6 +1,9 @@
+import time
+
 from django.db import transaction
 from django_cron import CronJobBase, Schedule
 from mcstatus import MinecraftServer
+from common.misc_storage import MiscStorage
 
 from .models import StatsEntry
 
@@ -39,3 +42,5 @@ class UpdateJob(CronJobBase):
                 entries += [StatsEntry(nickname=name, uuid=uuid, time=self.RUN_EVERY_MINS)]
             
             StatsEntry.objects.bulk_create(entries)  # pylint: disable=no-member
+
+        MiscStorage.set('player_online_stats.last_update', str(int(time.time())))

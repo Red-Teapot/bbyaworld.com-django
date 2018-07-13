@@ -3,6 +3,8 @@ import math, datetime
 from django.shortcuts import render
 from django.views.generic.list import ListView
 
+from common.misc_storage import MiscStorage
+
 from .models import StatsEntry
 
 class StatsView(ListView):
@@ -10,7 +12,7 @@ class StatsView(ListView):
     paginate_by = 50
     template_name = 'player_online_stats/index.html'
     extra_context = {
-        'last_update': datetime.datetime(2012, 2, 16, 15, 23, 35),
+        'last_update': datetime.datetime.fromtimestamp(int(MiscStorage.get('player_online_stats.last_update', '0'))),
     }
 
     def get_queryset(self):

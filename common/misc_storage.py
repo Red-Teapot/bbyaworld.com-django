@@ -3,8 +3,12 @@ from .models import MiscStorageEntry
 class MiscStorage():
 
     @staticmethod
-    def put(key: str, value: str):
-        entry = MiscStorageEntry(key=key, value=value)
+    def set(key: str, value: str):
+        try:
+            entry = MiscStorageEntry.objects.get(key=key)  # pylint: disable=no-member
+            entry.value = value
+        except:
+            entry = MiscStorageEntry(key=key, value=value)
         entry.save()
     
     @staticmethod
