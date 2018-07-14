@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'pipeline',
     'django_cron',
     'common.apps.CommonConfig',
+    'server_status.apps.ServerStatusConfig',
     'website.apps.WebsiteConfig',
     'player_online_stats.apps.PlayerOnlineStatsConfig',
 ]
