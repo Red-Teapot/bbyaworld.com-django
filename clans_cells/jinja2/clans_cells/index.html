@@ -1,0 +1,72 @@
+{% extends 'common/base.html' %}
+
+{% set body_class = 'carousel-narrow' %}
+{% set title = 'Кланы' %}
+
+{% block content %}
+    {% include 'common/header.html' %}
+
+    <div class="container content">
+        <h1>{{ title }}</h1>
+        <h2>Совет кланов</h2>
+        <p class="minor">Последнее обновление {{ last_update|date_format() }} МСК.</p>
+        <table class="stats">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>
+                        Клан
+                    </td>
+                    <td>
+                        Соты
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in object_list|selectattr('is_in_council', 'eq', True) %}
+                    {% set list_index = loop.index0 %}
+                    <tr>
+                        <td class="index">{{ row['order'] + 1 }}</td>
+                        <td>{{ row['name'] }}</td>
+                        <td class="right">{{ row['cell_count'] }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="empty" colspan="3">Тут пусто</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>Остальные кланы</h2>
+        <table class="stats">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>
+                        Клан
+                    </td>
+                    <td>
+                        Соты
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in object_list|selectattr('is_in_council', 'eq', False) %}
+                    {% set list_index = loop.index0 %}
+                    <tr>
+                        <td class="index">{{ row['order'] + 1 }}</td>
+                        <td>{{ row['name'] }}</td>
+                        <td class="right">{{ row['cell_count'] }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td class="empty" colspan="3">Тут пусто</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'common/footer.html' %}
+{% endblock %}

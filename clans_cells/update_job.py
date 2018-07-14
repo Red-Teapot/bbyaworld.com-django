@@ -64,3 +64,5 @@ class UpdateJob(CronJobBase):
         with transaction.atomic():
             ClanModel.objects.all().delete()  # pylint: disable=no-member
             ClanModel.objects.bulk_create(entries)  # pylint: disable=no-member
+
+        MiscStorage.set('clans_cells.last_update', str(int(time.time())))
