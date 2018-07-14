@@ -39,8 +39,8 @@
     <body {% if body_class %}class="{{ body_class }}"{% endif %}>
         {% block content %}{% endblock %}
 
-        {% include 'website/components/yandex-metrika.html' %}
-        {% include 'website/components/google-analytics.html' %}
+        {% include 'common/yandex-metrika.html' %}
+        {% include 'common/google-analytics.html' %}
 
         {% javascript 'bower' %}
         {% javascript 'website_main' %}
