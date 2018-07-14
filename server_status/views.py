@@ -17,7 +17,6 @@ def status(request):
     cache_raw = MiscStorage.get(ms_key, False)
     if cache_raw:
         cache = json.loads(cache_raw)
-        print('cache', str(cache), 'timestamp' in cache)
         if 'timestamp' in cache and type(cache['timestamp']) is int and int(time.time()) - cache['timestamp'] <= CACHE_FOR:
             result = cache['data']
             result['cached'] = True
