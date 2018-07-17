@@ -40,8 +40,6 @@ class UpdateJob(CronJobBase):
 
         order = 0
 
-        print(clans_sorted)
-
         entries = list()
 
         for i in range(0, min([len(clans_sorted), 5])):
