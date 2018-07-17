@@ -1,4 +1,4 @@
-import math
+import math, urllib
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import reverse
@@ -11,12 +11,18 @@ def number_format(value, thousand_sep=' ', point=',', digits=1):
 def date_format(value):
     return '{:%d.%m.%Y в %H:%M:%S}'.format(value)
 
+def query(entries):
+    res = '?' + urllib.parse.urlencode(entries)
+    return res
+
+
 def environment(**options):
     env = Environment(**options)
 
     env.globals.update({
         'static': staticfiles_storage.url,
         'url': reverse,
+        'query': query,
     })
 
     env.filters.update({

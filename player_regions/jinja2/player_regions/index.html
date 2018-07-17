@@ -1,0 +1,86 @@
+{% extends 'common/base.html' %}
+
+{% set class = 'carousel-narrow' %}
+{% set title = 'Территории игроков' %}
+
+{% block content %}
+    {% include 'common/header.html' %}
+
+    <div class="container content">
+        <h1>{{ title }}</h1>
+        <p class="minor">Последнее обновление {{ last_update|date_format() }} МСК.</p>
+        <table class="stats area-table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <a href="{{ query({'sort':'nickname', 'dir':'desc'}) if (sort == 'nickname' and sort_dir == 'asc') else query({'sort':'nickname', 'dir':'asc'}) }}">
+                            Территория
+                            {% if sort == 'nickname' %}
+                                <span class="caret {{ 'caret-up' if sort_dir == 'desc'  else '' }}"></span>
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ query({'sort':'area', 'dir':'desc'}) if (sort == 'area' and sort_dir == 'asc') else query({'sort':'area', 'dir':'asc'}) }}">
+                            Площадь
+                            {% if sort == 'area' %}
+                                <span class="caret {{ 'caret-up' if sort_dir == 'desc'  else '' }}"></span>
+                            {% endif %}
+                        </a>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {% if list|length <= 0 and misc|length <= 0 %}
+                    <tr>
+                        <td class="empty" colspan="3">Тут пусто</td>
+                    </tr>
+                {% else %}
+                    {% for nickname, data in list %}
+                        {% set list_index = loop.index0 %}
+                        <tr class="collapse-toggle {{ 'dark' if list_index is even else '' }}" id="area-collapse-{{ list_index }}">
+                            <td class="index"><span class="caret area-caret-right"></span></td>
+                            {% set label = 'Государственные' if (nickname == 'social') else nickname %}
+                            <td>{{ label }}</td>
+                            <td class="right">{{ (data.total_area)|number_format() }}</td>
+                        </tr>
+                        {% for area in data.areas %}
+                            <tr class="collapse child area-collapse-{{ list_index }} {{ 'first' if loop.index0 == 0 else '' }} {{ 'last' if loop.last else '' }} {{ 'dark' if loop.index0 is even else '' }}">
+                                <td></td>
+                                <td>{{ area.label }}</td>
+                                <td class="right">{{ (area.area)|number_format() }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                    
+                    {% for area in misc %}
+                        <tr>
+                            <td class="index"><span class="caret area-caret-right"></span></td>
+                            <td>{{ area.label }}</td>
+                            <td class="right">{{ (area.area)|number_format() }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    {% include 'common/footer.html' %}
+    
+    <script>
+        (function() {
+            
+            function onLoad() {
+                $('.collapse-toggle').click(function() {
+                    var self = $(this);
+                    var childrenSelector = '.' + self.attr('id');
+                    self.find('.caret').toggleClass('area-caret-right').toggleClass('area-caret-down');
+                    $(childrenSelector).toggleClass('collapse');
+                });
+            };
+            
+            window.addEventListener('load', onLoad);
+        }());
+    </script>
+{% endblock %}

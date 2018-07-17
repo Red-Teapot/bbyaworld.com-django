@@ -23,5 +23,6 @@ urlpatterns = [
     path('online-stats/', include('player_online_stats.urls')),
     path('server-status/', include('server_status.urls')),
     path('clans-cells/', include('clans_cells.urls')),
+    path('player-regions/', include('player_regions.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

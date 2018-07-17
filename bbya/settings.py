@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'player_online_stats.apps.PlayerOnlineStatsConfig',
     'clans_cells.apps.ClansCellsConfig',
+    'player_regions.apps.PlayerRegionsConfig',
 ]
 
 MIDDLEWARE = [
@@ -191,4 +192,5 @@ PIPELINE = {
 CRON_CLASSES = [
     'player_online_stats.update_job.UpdateJob',
     'clans_cells.update_job.UpdateJob',
+    'player_regions.update_job.UpdateJob',
 ]
