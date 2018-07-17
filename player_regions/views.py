@@ -17,8 +17,6 @@ def region_insort(regions, region, sort='area', reverse=True):
         
         if i == len(regions) - 1:
             loop_finished = True
-
-    print(i)
     
     if loop_finished:
         regions += [region]
