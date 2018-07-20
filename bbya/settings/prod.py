@@ -30,19 +30,24 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
+        'fileDjango': {
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/main.log'),
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'verbose',
+        },
+        'fileApp': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/app.log'),
             'formatter': 'verbose',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['fileDjango'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
         },
         '': {
-            'handlers': ['file'],
+            'handlers': ['fileApp'],
             'level': os.getenv('APP_LOG_LEVEL', 'ERROR'),
         },
     },
