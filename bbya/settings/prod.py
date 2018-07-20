@@ -5,7 +5,7 @@ from .common import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['bbyaworld.com']
+ALLOWED_HOSTS += ['bbyaworld.com']
 
 DEFAULT_DB_SECRETS = SECRETS['db']['default']
 DATABASES = {

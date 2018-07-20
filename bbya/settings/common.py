@@ -8,22 +8,28 @@ BASE_DIR = str(Path(__file__).resolve().parent.parent.parent)
 
 SECRETS_FILE = os.path.join(BASE_DIR, 'secrets.json')
 
+SECRETS = {
+    'secret_key': 'so secret',
+    'db': {
+        'default': {
+            'name': 'db',
+            'user': 'django',
+            'password': 'django',
+        },
+    },
+    'allowed_hosts': [],
+}
+
 try:
     with open(SECRETS_FILE) as f:
-        SECRETS = json.loads(f.read())
+        secrets_json = json.loads(f.read())
+        SECRETS.update(secrets_json)
 except:
-    SECRETS = {
-        'secret_key': 'so secret',
-        'db': {
-            'default': {
-                'name': 'db',
-                'user': 'django',
-                'password': 'django',
-            },
-        },
-    }
+    pass
 
 SECRET_KEY = SECRETS['secret_key']
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]'] + SECRETS['allowed_hosts']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
