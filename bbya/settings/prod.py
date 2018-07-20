@@ -26,7 +26,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(name)s %(message)s'
         },
     },
     'handlers': {
@@ -39,11 +39,11 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
         },
         '': {
             'handlers': ['file'],
-            'level': os.getenv('APP_LOG_LEVEL', 'WARNING'),
+            'level': os.getenv('APP_LOG_LEVEL', 'ERROR'),
         },
     },
 }
