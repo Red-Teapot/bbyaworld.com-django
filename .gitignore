@@ -218,3 +218,6 @@ pip-selfcheck.json
 
 
 # End of https://www.gitignore.io/api/node,bower,django,python,stylus,virtualenv,visualstudiocode
+
+# Secrets JSON
+secrets.json
