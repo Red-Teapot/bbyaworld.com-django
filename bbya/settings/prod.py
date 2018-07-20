@@ -20,3 +20,30 @@ DATABASES = {
 }
 
 PIPELINE['PIPELINE_ENABLED'] = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/main.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'WARNING'),
+        },
+        '': {
+            'handlers': ['file'],
+            'level': os.getenv('APP_LOG_LEVEL', 'WARNING'),
+        },
+    },
+}
