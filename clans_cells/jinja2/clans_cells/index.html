@@ -23,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in object_list|selectattr('is_in_council', 'eq', True) %}
+                {% for row in object_list|selectattr('is_in_council', 'equalto', True) %}
                     {% set list_index = loop.index0 %}
                     <tr>
                         <td class="index">{{ row['order'] + 1 }}</td>
@@ -52,7 +52,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in object_list|selectattr('is_in_council', 'eq', False) %}
+                {% for row in object_list|selectattr('is_in_council', 'equalto', False) %}
                     {% set list_index = loop.index0 %}
                     <tr>
                         <td class="index">{{ row['order'] + 1 }}</td>
