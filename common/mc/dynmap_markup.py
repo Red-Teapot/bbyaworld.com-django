@@ -7,7 +7,7 @@ class DynmapMarkup(object):
     def load(self):
         with urllib.request.urlopen(self._url) as response:
             raw_data = response.read()
-            json_data = json.loads(raw_data, encoding='utf8')
+            json_data = json.loads(raw_data.decode('utf8'))
 
             self._data = json_data
     
