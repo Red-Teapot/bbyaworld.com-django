@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "yuglify": "^2.0.0"
+  },
   "devDependencies": {
     "stylus": "^0.54.5"
   },

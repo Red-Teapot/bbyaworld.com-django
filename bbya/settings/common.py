@@ -127,8 +127,9 @@ STATICFILES_DIRS = (
 
 PIPELINE = {
     'PIPELINE_ENABLED': False,
-    'CSS_COMPRESSOR': None,
-    'JS_COMPRESSOR': None,
+    'CSS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'JS_COMPRESSOR': 'pipeline.compressors.yuglify.YuglifyCompressor',
+    'YUGLIFY_BINARY': os.path.join(BASE_DIR, 'node_modules/yuglify/bin/yuglify'),
     'COMPILERS': (
         'pipeline.compilers.stylus.StylusCompiler',
     ),
