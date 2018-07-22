@@ -1,5 +1,5 @@
 django
 django-pipeline
 jinja2
-django-cron
+https://github.com/Red-Teapot/django-cron/archive/master.zip
 mcstatus

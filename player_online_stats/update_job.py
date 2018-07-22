@@ -9,8 +9,9 @@ from .models import StatsEntry
 
 class UpdateJob(CronJobBase):
     RUN_EVERY_MINS = 2 # Once per 2 minutes
+    RUN_TOLERANCE_SECONDS = 5
 
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS, run_tolerance_seconds=RUN_TOLERANCE_SECONDS)
     code = 'player_online_stats.update_job'
 
     def do(self):
