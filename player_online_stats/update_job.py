@@ -7,6 +7,10 @@ from common.misc_storage import MiscStorage
 
 from .models import StatsEntry
 
+
+def strip_dashes(value: str) -> str:
+    return value.replace('-', '')
+
 class UpdateJob(CronJobBase):
     RUN_EVERY_MINS = 2 # Once per 2 minutes
     RUN_TOLERANCE_SECONDS = 5
@@ -23,13 +27,15 @@ class UpdateJob(CronJobBase):
         
         players = dict()
         for p in status.players.sample:
-            players[p.id] = p.name
+            players[strip_dashes(p.id)] = p.name
+
+        print(players)
         
         with transaction.atomic():
             # Process players that are already in DB
             entries = StatsEntry.objects.filter(uuid__in=players.keys())  # pylint: disable=no-member
             for e in entries:
-                nickname = players.pop(e.uuid)
+                nickname = players.pop(strip_dashes(str(e.uuid)))
 
                 e.time += self.RUN_EVERY_MINS
                 if e.nickname is not nickname:
