@@ -28,8 +28,6 @@ class UpdateJob(CronJobBase):
         players = dict()
         for p in status.players.sample:
             players[strip_dashes(p.id)] = p.name
-
-        print(players)
         
         with transaction.atomic():
             # Process players that are already in DB
