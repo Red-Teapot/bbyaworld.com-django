@@ -19,9 +19,13 @@ class Job(CronJobBase):
                 job_types.append(job_type)
 
         for job_type in job_types:
-            job_logs = CronJobLog.objects.filter(code=job_type, is_success=True).order_by('-end_time')[:2]  # pylint: disable=no-member
+            job_logs = CronJobLog.objects.filter(code=job_type, is_success=True).order_by('-end_time')[:2].values('pk')  # pylint: disable=no-member
 
             if len(job_logs) <= 0:
                 continue
+            
+            job_logs_list = [x['pk'] for x in list(job_logs)]
 
-            CronJobLog.objects.filter(code=job_type, is_success=True).exclude(pk__in=job_logs).delete()  # pylint: disable=no-member
+            to_delete = CronJobLog.objects.filter(code=job_type, is_success=True).exclude(pk__in=job_logs_list)  # pylint: disable=no-member
+
+            to_delete.delete()
