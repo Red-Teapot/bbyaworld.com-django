@@ -22,8 +22,26 @@ $(function() {
 
     $.get('get-data', null, function(data) {
         $.each(data, function(type, values) {
+            var dates = values.dates.map((val) => {
+                var date = new Date(val);
+                var result = '';
+
+                var day = date.getDate();
+                result += day < 10 ? '0' + day : day;
+                result += '.';
+
+                var month = date.getMonth() + 1;
+                result += month < 10 ? '0' + month : month;
+                result += '.';
+
+                var year = date.getFullYear();
+                result += year;
+
+                return result;
+            });
+
             var trace = {
-                x: values.dates,
+                x: dates,
                 y: values.values,
                 type: 'scatter',
                 name: trace_names[type]
