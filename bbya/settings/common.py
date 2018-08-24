@@ -18,6 +18,13 @@ SECRETS = {
         },
     },
     'allowed_hosts': [],
+    'mc': {
+        'rcon': {
+            'host': None,
+            'port': 25575,
+            'password': None,
+        },
+    },
 }
 
 try:
