@@ -3,3 +3,4 @@ django-pipeline
 jinja2
 https://github.com/Red-Teapot/django-cron/archive/master.zip
 mcstatus
+mcrcon
