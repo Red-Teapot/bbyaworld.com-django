@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'player_online_stats.apps.PlayerOnlineStatsConfig',
     'clans_cells.apps.ClansCellsConfig',
     'player_regions.apps.PlayerRegionsConfig',
+    'powerstation_graphs.apps.PowerstationGraphsConfig',
 ]
 
 MIDDLEWARE = [
