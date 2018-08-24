@@ -178,5 +178,6 @@ CRON_CLASSES = [
     'player_online_stats.update_job.UpdateJob',
     'clans_cells.update_job.UpdateJob',
     'player_regions.update_job.UpdateJob',
+    'powerstation_graphs.update_job.UpdateJob',
     'common.delete_old_successful_cron_jobs.Job',
 ]
