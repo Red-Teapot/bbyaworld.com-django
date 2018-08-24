@@ -1,17 +1,31 @@
 from django.shortcuts import render
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 from .scoreboard import Scoreboard
+from .models import Measurement
 
 
 def index(request):
-    rcon_settings = settings.SECRETS['mc']['rcon']
-    response = ''
+    return render(request, 'powerstation_graphs/index.html')
 
-    with Scoreboard(rcon_settings['host'], rcon_settings['password'], port=rcon_settings['port']) as scoreboard:
-        response += str(scoreboard.get_list_for_player('.PPWheat')) + '<br />'
-        response += str(scoreboard.get_list_for_player('.PPCoal')) + '<br />'
-        response += str(scoreboard.get_list_for_player('.PPAlm')) + '<br />'
-        response += str(scoreboard.get_list_for_player('.expMarket')) + '<br />'
-    return HttpResponse(response);
+def get_data(request):
+    measurements = Measurement.objects.all()  # pylint: disable=no-member
+    data = dict()
+
+    for measurement in measurements:
+        if str(measurement.type) not in Measurement.value_types_reverse:
+            continue
+        
+        m_type = Measurement.value_types_reverse[str(measurement.type)]
+
+        if m_type not in data:
+            data[m_type] = {
+                'dates': list(),
+                'values': list(),
+            }
+        
+        data[m_type]['dates'].append(measurement.datetime)
+        data[m_type]['values'].append(measurement.value)
+    
+    return JsonResponse(data)

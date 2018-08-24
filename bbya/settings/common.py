@@ -171,6 +171,13 @@ PIPELINE = {
             ),
             'output_filename': 'js/bower.js',
         },
+        'plot': {
+            'source_filenames': (
+                'plotlyjs/plotly.js',
+                'powerstation_graphs/js/*.js',
+            ),
+            'output_filename': 'js/plot.js',
+        }
     },
 }
 

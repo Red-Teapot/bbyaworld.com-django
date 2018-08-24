@@ -12,3 +12,5 @@ class Measurement(models.Model):
         'diamond_pp': 3,
         'exp_market': 4,
     }
+
+    value_types_reverse = {str(v) : str(k) for k, v in value_types.items()}
