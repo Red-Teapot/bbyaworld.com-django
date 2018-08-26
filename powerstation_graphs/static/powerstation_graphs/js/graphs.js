@@ -67,7 +67,7 @@ $(function() {
         Plotly.plot(plotDiv, traces, layout);
 
         if(dataTypes.length > 1) {
-            $.each(dataTypes, function(k) {
+            $.each(dataTypes, function(v, k) {
                 var id = k;
                 var label_text = k in trace_names ? trace_names[k] : k;
                 
