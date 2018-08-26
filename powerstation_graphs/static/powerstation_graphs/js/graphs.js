@@ -63,8 +63,11 @@ $(function() {
             traces.push(trace);
         });
 
-        layout.title = title;
-        Plotly.plot(plotDiv, traces, layout);
+        var currentLayout = {};
+        Object.assign(currentLayout, layout);
+        currentLayout.title = title;
+        
+        Plotly.plot(plotDiv, traces, currentLayout);
 
         if(dataTypes.length > 1) {
             $.each(dataTypes, function(v, k) {
