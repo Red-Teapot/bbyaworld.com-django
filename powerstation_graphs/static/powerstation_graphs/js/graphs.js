@@ -44,12 +44,11 @@ $(function() {
         var plotDiv = document.getElementById(plotDivId);
         var checkboxForm = $(plotDiv).append('<form></form>');
 
-
         $.each(data, function(type, values) {
             if(!dataTypes.includes(type))
                 return true;
 
-            var dates = values.dates.map((val) => {
+            var dates = values.dates.map(function(val) {
                 return formatDate(new Date(val));
             });
 
@@ -68,7 +67,7 @@ $(function() {
         Plotly.plot(plotDiv, traces, layout);
 
         if(dataTypes.length > 1) {
-            $.map(dataTypes, (k) => {
+            $.each(dataTypes, function(k) {
                 var id = k;
                 var label_text = k in trace_names ? trace_names[k] : k;
                 
