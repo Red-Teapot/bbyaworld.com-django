@@ -121,7 +121,7 @@ $(function() {
         var sellData = [];
         var buyData = [];
 
-        $.each(expMarketData.values, function(val) {
+        $.each(expMarketData.values, function(idx, val) {
             for(var i = 0; i < expTable.length; i++) {
                 var expEntry = expTable[i];
 
