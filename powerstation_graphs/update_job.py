@@ -27,10 +27,10 @@ class UpdateJob(CronJobBase):
         rcon_settings = settings.SECRETS['mc']['rcon']
 
         with Scoreboard(rcon_settings['host'], rcon_settings['password'], port=rcon_settings['port']) as scoreboard:
-            raw_wheat_pp_value = scoreboard.get_list_for_player('.PPWheat')['CustomID']
-            raw_coal_pp_value = scoreboard.get_list_for_player('.PPCoal')['CustomID']
-            raw_diamond_pp_value = scoreboard.get_list_for_player('.PPAlm')['CustomID']
-            raw_exp_market_value = scoreboard.get_list_for_player('.expMarket')['CustomID']
+            raw_wheat_pp_value = scoreboard.get_value_for_player('.PPWheat', 'CustomID')
+            raw_coal_pp_value = scoreboard.get_value_for_player('.PPCoal', 'CustomID')
+            raw_diamond_pp_value = scoreboard.get_value_for_player('.PPAlm', 'CustomID')
+            raw_exp_market_value = scoreboard.get_value_for_player('.expMarket', 'CustomID')
 
             wheat_pp_value = raw_wheat_pp_value // 1000
             coal_pp_value = raw_coal_pp_value // 1000
