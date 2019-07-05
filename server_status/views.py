@@ -30,6 +30,10 @@ def status(request):
         result['online'] = True
         result['status'] = 'success'
 
+        # mcstatus actually returns None if there are no players on the server
+        if not status.players.sample:
+            status.players.sample = list()
+
         result['players'] = {
             'online': status.players.online,
             'max': status.players.max,
